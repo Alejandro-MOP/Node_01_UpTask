@@ -5,12 +5,20 @@ const { body } = require('express-validator/check');
 
 module.exports = function() {
 
-    //rutas para la app
     router.get('/', proyectosController.proyectosHome );
+
     router.get('/nuevo-proyecto', proyectosController.formularioProyecto)
+
     router.post('/nuevo-proyecto',
         body('nombre').not().isEmpty().trim().escape(),
-        proyectosController.nuevoProyecto);
+        proyectosController.nuevoProyecto
+    );
     
+    //Listar proyecto
+    router.get('/proyectos/:url', proyectosController.proyectoPorUrl);
+
+    //Actualizar Proyecto
+    router.get('/proyectos/editar/:id', proyectosController.formularioEditar);
+
     return router;
 }
