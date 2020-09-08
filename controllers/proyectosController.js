@@ -46,7 +46,7 @@ exports.nuevoProyecto = async (req, res) => {
     }else{
         //Insertar en BD
         //const url = slug(nombre).toLowerCase(); crear la url
-        const proyecto = await Proyectos.create({ nombre });
+        await Proyectos.create({ nombre });
         res.redirect('/');            
     }
 }
@@ -91,4 +91,50 @@ exports.formularioEditar = async (req, res, next) => {
         proyecto
     });
 
+}
+
+exports.actualizarProyecto = async (req, res) => {
+
+    const proyectos = await Proyectos.findAll(); 
+
+    const { nombre } = req.body;
+
+    let errores = [];
+
+    if(!nombre){
+        errores.push({'texto': 'Agrega un nombre al Proyecto'});
+    }
+
+    //si hay errores
+    if(errores.length > 0){
+
+        res.render('nuevoProyecto', {
+            nombrePagina: 'Nuevo Proyecto',
+            errores,
+            proyectos
+        });
+
+    }else{
+        
+        await Proyectos.update(
+            { nombre: nombre },
+            { where: { id: req.params.id } }
+        );
+        res.redirect('/');
+    }
+}
+
+//Eliminarproyecto
+
+exports.eliminarProyecto = async (req, res, next) => {
+
+    const { urlProyecto } = req.query;
+
+    const resultado = await Proyectos.destroy( { where: {url: urlProyecto} } );
+
+    if (!resultado) {
+        return next();
+    }
+
+    res.status(200).send('Proyecto Eliminado Correctamente');
 }
