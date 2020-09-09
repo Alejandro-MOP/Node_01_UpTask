@@ -11,7 +11,7 @@ body {
 /** Login **/
 .login,
 .crear-cuenta {
-    background: #572364;
+    background: #015d52;
 }
 .contenedor-formulario {
     display: flex;
@@ -60,7 +60,7 @@ body {
     height: 3rem;
     border: 0;
     flex: 1;
-    border: 1px solid #572364;
+    border: 1px solid #015d52;
     border-radius: 5rem;
     padding-left: 2rem;
     color: black;
@@ -72,7 +72,7 @@ body {
    justify-content: flex-end;
 }
 .boton {
-    background-color: #FDD835;
+    background-color: #FFBF00;
     text-align: center;
     transition: background-color .5s ease-in-out;
     padding: 1.8rem;
@@ -114,7 +114,7 @@ body.index {
     height: 100vh;
 }
 .barra {
-    background-color: #572364;
+    background-color: #015d52;
     padding: 1rem;
     height: 60px;
     display: flex;
@@ -134,7 +134,7 @@ body.index {
 .contenedor-proyectos {
     height: 100%;
     max-width: 300px;
-    background-color: #AB47BC;
+    background-color: #1CBAA4;
     padding-top: 1rem;
 }
 .panel {
@@ -145,9 +145,10 @@ body.index {
     color: white;
     font-weight: bold;
     text-decoration: none;
+    font-size: 1rem;
 }
 .panel h2 {
-    color: #FDD835;
+    color: #FFBF00;
     font-weight: 900;
     text-align: center;
     font-size: 2rem;
@@ -158,7 +159,7 @@ body.index {
     margin-left: 1rem;
 }
 .crear-proyecto a {
-    color: #572364;
+    color: #015d52;
 }
 
 .lista-proyectos ul{
@@ -170,7 +171,7 @@ body.index {
     margin-bottom: 1rem;
 }
 .lista-proyectos ul li a:hover {
-    color: #FDD835;
+    color: #FFBF00;
 }
 /** Contenido Principal */
 .contenedor {
@@ -199,11 +200,12 @@ body.index {
 .agregar-tarea {
     max-width: 800px;
     width: 90%;
-    background-color: #AB47BC;
+    background-color: #1CBAA4;
     margin: 0 auto;
     padding: 2rem;
     color: white;
     transition: background-color .5s ease-in-out;
+    border-radius: 1rem;
 }
 
 /** Listado Pendientes **/
@@ -284,7 +286,7 @@ body.index {
 form.agregar-proyecto {
     max-width: 800px;
     width: 90%;
-    background-color: #AB47BC;
+    background-color: #1CBAA4;
     margin: 0 auto;
     padding: 2rem;
     color: white;
@@ -304,7 +306,7 @@ form.agregar-proyecto input[type="text"]{
     width: 100%;
     height: 3rem;
     padding-left: 1rem;
-    border: 1px solid #572364;
+    border: 1px solid #015d52;
     border-radius: .5rem;
     color: black;
 }
@@ -313,7 +315,7 @@ form input[type="submit"]{
     text-align: center;
     display: block;
     padding: 1.5rem;
-    color: #572364;
+    color: #015d52;
     width: auto;
     margin: 0;
 }

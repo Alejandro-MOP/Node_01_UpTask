@@ -4,7 +4,12 @@ block contenido
     .contenido-principal    
         h1 #{nombrePagina} - #{proyecto.nombre}
 
-        //TODAO - FORMULARIO AQUI
+        form.agregar-tarea(action=`/proyectos/${proyecto.url}` method="POST")
+            .campo
+                label(for="tarea") Tarea:
+                input.nombre-tarea(type="text" name="tarea" placeholder="Nombre de Tarea")
+            .campo.enviar
+                input.boton.nueva-tarea(type="submit" value="Agregar")
 
         //TODO - LISTADO DE PENDIENTES
         //-pre= vardump(proyecto)
