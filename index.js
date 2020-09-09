@@ -14,6 +14,7 @@ db.sync()
 
 //importar modelo
 require('./models/Proyectos');
+require('./models/Tareas');
 
 //crear app express
 const app = express();

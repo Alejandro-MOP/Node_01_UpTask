@@ -7,7 +7,7 @@ const shortid = require('shortid');
 const Proyectos = db.define('proyectos',{
 
     id: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.INTEGER(11),
         autoIncrement: true,
         primaryKey: true,
         
