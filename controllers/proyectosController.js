@@ -1,5 +1,6 @@
 const Proyectos = require('../models/Proyectos');
-const slug = require('slug');
+const Tareas = require('../models/Tareas');
+
 
 exports.proyectosHome = async (req, res) => {
 
@@ -22,8 +23,7 @@ exports.formularioProyecto = async (req, res) => {
 }
 
 exports.nuevoProyecto = async (req, res) => {
-    //Enviar a consola console.log(req.body);
-    //Validar el input no este vacio
+
     const proyectos = await Proyectos.findAll(); 
 
     const { nombre } = req.body;
@@ -34,7 +34,6 @@ exports.nuevoProyecto = async (req, res) => {
         errores.push({'texto': 'Agrega un nombre al Proyecto'});
     }
 
-    //si hay errores
     if(errores.length > 0){
 
         res.render('nuevoProyecto', {
@@ -47,7 +46,7 @@ exports.nuevoProyecto = async (req, res) => {
         //Insertar en BD
         //const url = slug(nombre).toLowerCase(); crear la url
         await Proyectos.create({ nombre });
-        res.redirect('/');            
+        res.redirect('/');
     }
 }
 
@@ -55,7 +54,6 @@ exports.proyectoPorUrl = async (req, res, next) => {
 
     const proyectosPromise = Proyectos.findAll();
     const proyectoPromise = Proyectos.findOne({
-
         where: {
             url: req.params.url
         }
@@ -63,13 +61,24 @@ exports.proyectoPorUrl = async (req, res, next) => {
 
     const [ proyectos, proyecto ] = await Promise.all([ proyectosPromise, proyectoPromise ]);
 
+    //consultar tareas de proyecto actual
+    const tareas = await Tareas.findAll({
+        where: {
+            proyectoId: proyecto.id
+        }
+        //, include: [
+        //     { model: Proyectos }
+        // ]
+    });
+
+    
     if(!proyecto) return next();
 
     res.render('tareas', {
-
         nombrePagina: 'Tareas del Proyecto',
         proyectos,
-        proyecto
+        proyecto,
+        tareas
     })
 }
 
