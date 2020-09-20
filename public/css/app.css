@@ -1,5 +1,6 @@
 html {
     box-sizing: border-box;
+    font-size: 85%;
 }
 *, *:before, *:after {
     box-sizing: inherit;
@@ -245,7 +246,7 @@ body.index {
     text-align: center;
     font-size: .9rem;
     font-weight: 900;
-    max-width: 300px;
+    max-width: 800px;
     margin: 0 auto 1rem auto;
     text-transform: uppercase;
 }
