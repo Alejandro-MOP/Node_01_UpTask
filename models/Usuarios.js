@@ -55,7 +55,7 @@ const Usuarios = db.define('usuarios', {
     }
 });
 
-//Usuarios.hasMany(Proyectos); //Cardinalidad 1 =>muchos
+Usuarios.hasMany(Proyectos); //Cardinalidad 1 =>muchos
 
 Usuarios.prototype.verificarPassword = function(password){
     return bcrypt.compareSync(password, this.password)
