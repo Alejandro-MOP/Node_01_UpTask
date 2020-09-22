@@ -7,16 +7,18 @@ const helpers = require('./helpers');
 const flash = require('connect-flash');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
+const passport = require('./config/passport');
+
+//importar modelo
+require('./models/Proyectos');
+require('./models/Tareas');
+require('./models/Usuarios');
 
 //Connexion BD
 db.sync()
 .then( () => console.log('Conectado a la BD') )
 .catch( (error) => console.log(error) );
 
-//importar modelo
-require('./models/Proyectos');
-require('./models/Tareas');
-require('./models/Usuarios');
 
 //crear app express
 const app = express();
@@ -33,8 +35,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //Añadir la carpeta de las vistas
 app.set('views', path.join(__dirname, './views'));
 
-//Agregar flash messages
-app.use(flash());
 
 //
 app.use(cookieParser());
@@ -45,6 +45,13 @@ app.use(session({
     resave: false,
     saveUninitialized: false
 }));
+
+//Passport
+app.use(passport.initialize());
+app.use(passport.session());
+
+//Agregar flash messages
+app.use(flash());
 
 //funcion vardump en applicacion
 app.use( (req, res, next) =>{
