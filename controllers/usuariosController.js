@@ -35,3 +35,15 @@ exports.crearCuenta = async (req, res) => {
     
 
 }
+
+exports.formIniciarSesion = (req, res) => {
+
+    //console.log(res.locals.errores ); debugear mensajes de error de passport
+
+    const { error } = res.locals.errores;
+
+    res.render('iniciarSesion', {
+        nombrePagina: 'Inicia sesión en UpTask',
+        error
+    })
+}
