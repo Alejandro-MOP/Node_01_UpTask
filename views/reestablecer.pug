@@ -4,7 +4,8 @@ html(lang="es")
         include partials/header
     body.login
         .contenedor-formulario
-            h1 Crear tu cuenta en UpTask
+            h1= nombrePagina
+            p Agrega tu email para reestablecer contraseña
 
             if locals.errores
                 .alertas
@@ -13,16 +14,12 @@ html(lang="es")
                             .alerta(class=`${categoria}`)
                                 p= error
 
-
-            form#formulario.caja.caja-login(method="POST" action="/crear-cuenta")
+            form.caja-login(method="POST" action="/reestablecer")
                 .campo
                     label(for="email") E-mail:
                     input(type="email" name="email" placeholder="Tu Email" value= email)
-                .campo
-                    label(for="password") Contraseña:
-                    input(type="password" name="password" placeholder="Tu Contraseña" value=password)
                 .campo.enviar
-                    input.boton(type="submit" value="Crear Cuenta")
-                .campo
+                    input.boton(type="submit" value="Reestablecer Contraseña")
+                .campo.acciones
                     a(href="/iniciar-sesion") 
-                        span.verde Iniciar Sesión
+                        span.verde ¡Ya recorde mi contraseña!,  volver a Login
