@@ -64,3 +64,5 @@ app.use( (req, res, next) =>{
 app.use('/', routes() );
 
 app.listen(4000);
+
+//require('./handlers/email'); enviar mail para pruebas
