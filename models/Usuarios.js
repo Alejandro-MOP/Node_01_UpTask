@@ -2,6 +2,7 @@ const Sequelize = require('sequelize');
 const db = require('../config/db');
 const Proyectos = require('./Proyectos');
 const bcrypt = require('bcrypt-nodejs');
+const { sequelize } = require('./Proyectos');
 
 const Usuarios = db.define('usuarios', {
 
@@ -46,7 +47,21 @@ const Usuarios = db.define('usuarios', {
                 msg: 'El password no puede ir vácio'
             }
         }
+    },
+
+    token: {
+        type: Sequelize.STRING
+    },
+
+    expiracion: {
+        type: Sequelize.DATE
+    },
+
+    activo: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0
     }
+
 }, {
     hooks: {
         beforeCreate(usuario){
