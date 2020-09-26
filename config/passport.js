@@ -15,7 +15,7 @@ passport.use(
         //consulta a bd para validación
         async (email, password, done) => {
             try {
-                const usuario = await Usuarios.findOne( { where: { email } } );
+                const usuario = await Usuarios.findOne( { where: { email, activo: 1 } } );
                 //password incorrecto
                 if (!usuario.verificarPassword(password)) {
                     return done(null, false, {
