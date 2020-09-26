@@ -1,4 +1,5 @@
 const Usuarios = require('../models/Usuarios');
+const enviarEmail = require('../handlers/email');
 
 exports.formCrearCuenta = (req, res) => {
 
@@ -20,6 +21,23 @@ exports.crearCuenta = async (req, res) => {
             password
         });
 
+        //url de confirmacion de cuenta creada
+        const confirmarUrl = `http://${req.headers.host}/confirmar/${email}`; //console.log(resetUrl);
+
+        //crear objeto de usuario
+        const usuario = {
+            email
+        }
+
+        //enviar mail
+        enviarEmail.enviar({
+            usuario,
+            subject: 'Confirma tu cuenta Uptask',
+            confirmarUrl,
+            documento: 'confirmarCuenta'
+        });
+
+        req.flash('correcto', 'Hemos enviado un correo para confirmar tu cuenta');
         res.redirect('/iniciar-sesion');
         
     } catch (error) {
@@ -46,4 +64,26 @@ exports.formIniciarSesion = (req, res) => {
         nombrePagina: 'Inicia sesión en UpTask',
         error
     })
+}
+
+exports.formRestablecerPassword = (req, res) => {
+
+    res.render('reestablecer',{
+        nombrePagina: 'Reestablecer Contraseña'
+    })
+}
+
+exports.confirmarCuenta = async (req, res) => {
+    const usuario = await Usuarios.findOne( { where: { email: req.params.correo } } );
+
+    if (!usuario) {
+        req.flash('error', 'No válido');
+        res.redirect('/crear-cuenta');
+    }
+
+    usuario.activo = 1;
+    await usuario.save();
+
+    req.flash('correcto', 'Cuenta activada correctamente');
+    res.redirect('/iniciar-sesion');
 }
