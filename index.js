@@ -9,6 +9,8 @@ const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const passport = require('./config/passport');
 
+require('dotenv').config({ path: 'variables.env'})
+
 //importar modelo
 require('./models/Proyectos');
 require('./models/Tareas');
@@ -63,6 +65,16 @@ app.use( (req, res, next) =>{
 
 app.use('/', routes() );
 
-app.listen(4000);
+
+//Servidor y puerto
+
+const host = process.env.HOST || '0.0.0.0';
+const port = process.env.PORT || 4000;
+
+
+
+app.listen(port, host, () => {
+    console.log('El servidor esta corriendo por el puerto: ', port);
+});
 
 //require('./handlers/email'); enviar mail para pruebas
