@@ -4,7 +4,8 @@
   "description": "Proyecto UpTaskt con Node y MVC",
   "main": "index.js",
   "scripts": {
-    "start": "concurrently \"npm run dev \" \"npm run watch\"",
+    "desarollo": "concurrently \"npm run dev \" \"npm run watch\"",
+    "start": "node ./index.js",
     "dev": "nodemon ./index.js",
     "watch": "webpack --w --mode development"
   },
@@ -16,6 +17,7 @@
     "concurrently": "^5.3.0",
     "connect-flash": "^0.1.1",
     "cookie-parser": "^1.4.5",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
     "express-validator": "^6.6.1",
