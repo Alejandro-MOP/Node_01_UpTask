@@ -6,16 +6,24 @@ const util = require('util');
 const emailConfig = require('../config/email');
 const email = require('../config/email');
 
+// let transporter = nodemailer.createTransport({
+//     host: emailConfig.host,
+//     port: emailConfig.port,
+//     auth: {
+//       user: emailConfig.user,
+//       pass: emailConfig.pass,
+//     },
+// });
+
 let transporter = nodemailer.createTransport({
-    host: emailConfig.host,
-    port: emailConfig.port,
+    service: 'gmail',
     auth: {
       user: emailConfig.user,
-      pass: emailConfig.pass, 
+      pass: emailConfig.pass,
     },
 });
 
-//crear HTML    
+//crear HTML
 const generaHTML = (documento, opciones = {}) => {
     const html = pug.renderFile(`${__dirname}/../views/emails/${documento}.pug`, opciones);
     return juice(html);
@@ -24,7 +32,7 @@ const generaHTML = (documento, opciones = {}) => {
 exports.enviar = async opciones => {
     const html = generaHTML(opciones.documento, opciones);
     const text = htmlToText.fromString(html);
-    
+
     let info = transporter.sendMail({
         from: '"Up Task" <no-reply@uptask.com>',
         to: opciones.usuario.email,

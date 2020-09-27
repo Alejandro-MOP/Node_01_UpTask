@@ -30,10 +30,10 @@ exports.enviarToken = async (req, res) => {
     const { email } = req.body
 
     if (!email) {
-        req.flash('error', 'Ingresa tu email por favor');        
+        req.flash('error', 'Ingresa tu email por favor');
         res.redirect('/reestablecer');
     }
-    
+
     const usuario = await Usuarios.findOne( {where: { email } } );
 
     if (!usuario) {
@@ -55,7 +55,7 @@ exports.enviarToken = async (req, res) => {
         documento: 'resetPassword'
     });
 
-    req.flash('correcto', 'Revisa tu email, hemos enviado un enlace para reestablecer tu contraseña');
+    req.flash('correcto', 'Revisa tu email y tambien en la bandeja de SPAM, hemos enviado un enlace para reestablecer tu contraseña');
     res.redirect('/iniciar-sesion');
 }
 

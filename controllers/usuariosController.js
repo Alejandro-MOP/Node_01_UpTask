@@ -37,7 +37,7 @@ exports.crearCuenta = async (req, res) => {
             documento: 'confirmarCuenta'
         });
 
-        req.flash('correcto', 'Hemos enviado un correo para confirmar tu cuenta');
+        req.flash('correcto', 'Hemos enviado un correo para confirmar tu cuenta, revisa tambien en la bandeja de SPAM');
         res.redirect('/iniciar-sesion');
         
     } catch (error) {
